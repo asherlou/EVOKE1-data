@@ -16,6 +16,9 @@ df <- read_delim("L:/LovbeskyttetMapper01/Motion Sickness - ENS/EVOKE 1 (EpleyOm
                        delim = ";", escape_double = FALSE, col_types = cols(redcap_survey_identifier = col_skip(), 
                                                                             basisoplysninger_timestamp = col_skip()), 
                        trim_ws = TRUE)
+
+df <- read_delim("C:/Users/alois/Documents/R/Data/Interrim data 1.csv", 
+                 delim = ";", escape_double = FALSE,trim_ws = TRUE)
 df1 <- df
 ## ---- remove outliers ----
 
@@ -146,10 +149,10 @@ df_long_group <- df_long_main %>%
   select(record_id, MSAQ_score, Time, gender, valsalva, Category, valsalva, mssq_raw)
 df_long_group <- df_long_group %>%
   mutate(Group = case_when(
-    valsalva == "Yes" & Category == "First Rotation" ~ "A",
-    valsalva == "No" & Category == "Second Rotation" ~ "B",
-    valsalva == "No" & Category == "First Rotation" ~ "C",
-    valsalva == "Yes" & Category == "Second Rotation" ~ "D",
+    valsalva == "First" & Category == "First Rotation" ~ "A",
+    valsalva == "First" & Category == "Second Rotation" ~ "B",
+    valsalva == "Second" & Category == "First Rotation" ~ "C",
+    valsalva == "Second" & Category == "Second Rotation" ~ "D",
     TRUE ~ NA_character_
   ))
 
